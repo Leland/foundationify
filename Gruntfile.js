@@ -13,8 +13,8 @@ module.exports = function (grunt) {
 
     // configurable paths
     var config = {
-        app: '.',
-        dist: 'dist'
+        app: 'src',
+        dist: 'assets'
     };
 
     grunt.initConfig({
@@ -31,14 +31,6 @@ module.exports = function (grunt) {
             js: {
                 files: ['<%= config.app %>/scripts/*.js'],
                 tasks: ['concat:live']
-            },
-            update: {
-                files: ['<%= config.app %>/{layout,snippets,templates}/*.liquid'],
-                tasks: ['sync']
-            },
-            config: {
-                files: ['<%= config.app %>/config/*.{html,json}'],
-                tasks: ['sync']
             }
         },
         clean: {
@@ -60,9 +52,9 @@ module.exports = function (grunt) {
             options: {
                 sassDir: '<%= config.app %>/styles',
                 cssDir: '.tmp/styles',
-                imagesDir: '<%= config.app %>/assets',
+                imagesDir: '<%= config.app %>/images',
                 javascriptsDir: '<%= config.app %>/scripts',
-                fontsDir: '<%= config.app %>/assets',
+                fontsDir: '<%= config.app %>/fonts',
                 importPath: 'bower_components',
                 relativeAssets: true
             },
@@ -76,13 +68,13 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    '<%= config.dist %>/assets/modernizr.js': [
-                        '<%= config.app %>/bower_components/foundation/js/vendor/modernizr.js'
+                    '<%= config.dist %>/modernizr.js': [
+                        'bower_components/foundation/js/vendor/modernizr.js'
                     ],
-                    '<%= config.dist %>/assets/main.js': [
-                        '<%= config.app %>/bower_components/foundation/js/vendor/jquery.js',
-                        '<%= config.app %>/bower_components/foundation/js/foundation/foundation.js',
-                        '<%= config.app %>/bower_components/foundation/js/foundation/foundation.*.js',
+                    '<%= config.dist %>/main.js': [
+                        'bower_components/foundation/js/vendor/jquery.js',
+                        'bower_components/foundation/js/foundation/foundation.js',
+                        'bower_components/foundation/js/foundation/foundation.*.js',
                         '<%= config.app %>/scripts/{,*/}*.js'
                     ],
                 }
@@ -91,13 +83,13 @@ module.exports = function (grunt) {
         concat: {
             live: {
                 files: {
-                    '<%= config.dist %>/assets/modernizr.js': [
-                        '<%= config.app %>/bower_components/foundation/js/vendor/modernizr.js'
+                    '<%= config.dist %>/modernizr.js': [
+                        'bower_components/foundation/js/vendor/modernizr.js'
                     ],
-                    '<%= config.dist %>/assets/main.js': [
-                        '<%= config.app %>/bower_components/foundation/js/vendor/jquery.js',
-                        '<%= config.app %>/bower_components/foundation/js/foundation/foundation.js',
-                        '<%= config.app %>/bower_components/foundation/js/foundation/foundation.*.js',
+                    '<%= config.dist %>/main.js': [
+                        'bower_components/foundation/js/vendor/jquery.js',
+                        'bower_components/foundation/js/foundation/foundation.js',
+                        'bower_components/foundation/js/foundation/foundation.*.js',
                         '<%= config.app %>/scripts/{,*/}*.js'
                     ],
                 }
@@ -107,35 +99,20 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= config.app %>/assets',
+                    cwd: '<%= config.app %>/images',
                     src: '{,*/}*.{png,jpg,jpeg}',
-                    dest: '<%= config.dist %>/assets'
+                    dest: '<%= config.dist %>'
                 }]
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    '<%= config.dist %>/assets/main.css': [
+                    '<%= config.dist %>/main.css': [
                         '.tmp/styles/{,*/}*.css',
                         '<%= config.app %>/styles/{,*/}*.css'
                     ]
                 }
-            }
-        },
-        sync: {
-            main: {
-                files: [{
-                    cwd: '<%= config.app %>',
-                    src: [
-                        'assets/*',
-                        'config/*',
-                        'layout/*',
-                        'snippets/*',
-                        'templates/*',
-                    ],
-                    dest: '<%= config.dist %>',
-                }]
             }
         },
         copy: {
@@ -147,16 +124,12 @@ module.exports = function (grunt) {
                     dest: '<%= config.dist %>',
                     src: [
                         'assets/*',
-                        'config/*',
-                        'layout/*',
-                        'snippets/*',
-                        'templates/*',
                     ]
                 },
                 {
                     expand: true,
-                    cwd: '<%= config.app %>/bower_components/fontawesome/fonts',
-                    dest: '<%= config.dist %>/assets',
+                    cwd: 'bower_components/fontawesome/fonts',
+                    dest: '<%= config.dist %>',
                     src: [
                         '*'
                     ]

@@ -1,6 +1,5 @@
-# Foundationify
+# Foundationify [![devDependency Status](https://david-dm.org/lukebussey/foundationify/dev-status.svg)](https://david-dm.org/lukebussey/foundationify#info=devDependencies)
 
-[![devDependency Status](https://david-dm.org/lukebussey/foundationify/dev-status.svg)](https://david-dm.org/lukebussey/foundationify#info=devDependencies)
 
 Foundationify is a Shopify theme framework with all [Foundation](http://foundation.zurb.com/) 5 CSS and JavaScript available. You get a streamlined Grunt-based workflow that concatenates and minifies all your CSS, lints your JS, and lossessly compresses your theme's images.
 
